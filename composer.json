@@ -1,5 +1,8 @@
 {
     "name": "sunxyw/pdx-code",
+    "type": "library",
+    "license": "MIT",
+    "description": "A PHP library to parse (decode) Paradox-format code, includes Pdxtxt.",
     "require": {
         "php": "^8.0",
         "phplrt/runtime": "^3.2",
