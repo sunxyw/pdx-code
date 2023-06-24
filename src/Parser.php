@@ -26,6 +26,8 @@ final class Parser
 
     public function parse(string $code): iterable
     {
+        // remove all lines that start with a hash (may have \s or \t before)
+        $code = preg_replace('/#.*\n/', '', $code);
         return $this->parser->parse($code);
     }
 }
