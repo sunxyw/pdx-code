@@ -1,0 +1,17 @@
+{
+    "name": "sunxyw/pdx-code",
+    "require": {
+        "php": "^8.0",
+        "phplrt/runtime": "^3.2",
+        "phplrt/exception": "*"
+    },
+    "autoload": {
+        "psr-4": {
+            "Sunxyw\\ParadoxCode\\": "src"
+        }
+    },
+    "require-dev": {
+        "symfony/var-dumper": "^6.0",
+        "phplrt/phplrt": "^3.2"
+    }
+}

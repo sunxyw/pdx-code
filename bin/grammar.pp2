@@ -1,0 +1,72 @@
+%skip T_WHITESPACE \h+
+%skip T_COMMENT \#.*
+%skip T_NEWLINE \n
+
+%token T_BOOL_TRUE yes
+%token T_BOOL_FALSE no
+%token T_FLOAT [0-9]+\.[0-9]+
+%token T_INTEGER [0-9]+
+%token T_STRING \w+
+
+%token T_EQUALS \=
+%token T_BRACE_OPEN \{
+%token T_BRACE_CLOSE \}
+%token T_PLUS \+
+%token T_MINUS \-
+%token T_DOUBLE_QUOTE \"
+
+%pragma root Root
+
+#Root
+    : Pair()*
+    ;
+
+Value
+    : Object()
+    | Array()
+    | Boolean()
+    | Float()
+    | Integer()
+    | String()
+    ;
+
+// key = val
+#Pair
+    : String() ::T_EQUALS:: Value()
+    ;
+
+// { key = val, key = val }
+#Object
+    : ::T_BRACE_OPEN::
+        Pair()*
+      ::T_BRACE_CLOSE::
+    ;
+
+// { "val", "val" }
+#Array
+    : ::T_BRACE_OPEN::
+        Value()*
+      ::T_BRACE_CLOSE::
+    ;
+
+String
+    : <T_STRING>
+    | ::T_DOUBLE_QUOTE:: <T_STRING> ::T_DOUBLE_QUOTE::
+    ;
+
+Boolean
+    : <T_BOOL_TRUE>
+    | <T_BOOL_FALSE>
+    ;
+
+Sign
+    : ( <T_PLUS> | <T_MINUS> )?
+    ;
+
+Float
+    : Sign() <T_FLOAT>
+    ;
+
+Integer
+    : Sign() <T_INTEGER>
+    ;
